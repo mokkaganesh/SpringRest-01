@@ -1,0 +1,138 @@
+RestFul services :
+
+--------------------------------
+application will be build in different languages -> so that it is difficult to handle 
+so, we have JSON / XML are universal languages -> to handle the data 
+
+java <--> python
+
+
+///////////////////////////
+
+RMI   : does not support Transaction Management, Security ... 
+EJB   : -> it will give middleware services .(Enhanced version of RMI)
+	-> it given by sun microsystems 
+	-> now the problem comes here is Producer and consumer could be in JAVA only.
+	-> means -> there is no interoperability (language dependency)
+
+CORBA : application will be developed only in IDL(Interface Definition Language)
+	-> learning new  language is difficult.
+
+Webservices : 
+	-> to overcome the limitations of above(loophole b/w them because of distributed applications)
+	-> 10-12 from sun Microsystems
+	-> 10 	 member from Microsoft
+	-> 10    C++/C
+	
+	the team name is WSI(Webservice Interoperability):
+		-> they released Basic Profile (1.0)[Distributed Application] -
+			->they released JAX-RPC(java api for Xml - Remote procedure calls)
+		-> B.P (1.1)
+			->new version ->JAX-WS (java api for Xml - Webservices)
+	-> these are called ==> SOAP based webservices
+		(simple object access protocol)
+	
+	Drawbacks: 
+		-> Xml 
+		==>
+			<Product>
+				<pid>10</pid>              
+				<pname>fossil</pname>
+			</Product>
+				|
+				|
+			I want this object to talk with Java bean
+				|
+				pid=10
+				pname=fossil
+				|
+				|
+			JAX -B(bean) -> converts XML to java bean{serialization OR Marshalling -> taking up the object and separating and putting in the network style}
+
+
+
+---------------------------------------------------------------
+
+limitations with Webservices :
+===========================
+SOAP based web service are not really 100% interoperable and adoptable
+SOAP based webservices wont support JSON 
+SOAP based webservices are not easily adoptable(dependent on XML)
+
+this fellow is not in a position to accept the JSON Data.
+ 
+
+
+///////////////////////////////////////////////////////
+
+Rest Architecture :
+-----------
+Rest source : the fellow who will give the service.
+
+it is like api call endpoints -> so that it can able to communicate in both ways XML and JSON.
+
+-> then swagger will give the documentation (for the what type of request)
+
+
+REST components :
+-----------------
+1.Resource (Rest Source)
+2.Swagger Documentation
+3.XMl/JSON/text/Yml -> input can be any format (because Interoperable)
+4.Client -> to test wheather all the endpoints are working or not.
+5.Postman -> to test out application
+
+JAX-RS :Java api for XML - RestFulServices 
+-------------------------------------------
+During this development JSON is not present.
+we can develop RestFul services using Spring Rest Module.
+Spring MVC is sufficient to develop RestFul Services (additional jars are not required)
+
+
+Restful services principles :
+-----------------------------
+1.unique Address or path
+2.Uniform Constraint interfaces (request is made from client ->get or post 
+				
+				
+				@PostMapping("/save)
+				public ResponseEntity<String> save(Employee emp){
+				
+				}
+
+				@GetMapping("/{id}")
+				public ResponseEntity<String> findById(int id){
+				
+				}
+		)
+3.Media Representation :
+	
+**** in case of webapplication ==>customer 3 business (cust wull give the input based on this bussiness will be happen ,Business should give the response in way that customer should understand (GUI or web not like give data in XMl/JSON))
+**** when we work with distributed applications (B2B) -> if one fellow says you have the freedom to choose the output representation.
+ 
+4.Communication Stateless (http) : (remembers the past data)
+	eg : book my show -> booking ticket ask for Credit card.
+			2nd it wont ask -> because it store the data
+
+5.Hateos:hyper media as a engine for application state
+(Pagination)
+eg : i go and search in google 
+-> harry potter
+-> it is not dummping all the data 
+-> just it is creating a Links to gor for it
+->if the user is really intrested and , he will go for the link
+
+
+
+RestEnd point example :
+http://www.ganesh.com/get/courses
+
+{
+	cid :101,
+	cname:DS,
+	course-content : 'link'
+}
+
+
+
+
