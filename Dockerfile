@@ -6,10 +6,9 @@ RUN mvn dependency:go-offline
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-# Stage 2: Run the application on Tomcat
-FROM tomcat:10-jdk17
-COPY --from=builder /app/target/*.war /usr/local/tomcat/webapps/ROOT.war
-# Set the server port to match your application.properties
-ENV CATALINA_OPTS="-Dserver.port=9999"
+# Use Spring Boot's built-in executable JAR support instead of Tomcat
+FROM eclipse-temurin:17-jre
+WORKDIR /app
+COPY --from=builder /app/target/*.war /app/app.war
 EXPOSE 9999
-CMD ["catalina.sh", "run"]
+ENTRYPOINT ["java", "-jar", "/app/app.war", "--server.port=9999"]
